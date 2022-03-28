@@ -1,0 +1,20 @@
+.home {
+  margin: 30px 0;
+}
+.wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.logout-btn {
+  background-color: #db3447;
+  color: white;
+  margin: 0 0 0 8px;
+  padding: 8px;
+  border-radius: 4px;
+  max-height: 32px;
+}
+.profile {
+  display: inline-block;
+  width: 200px;
+  margin: 0 auto 30px;
+}

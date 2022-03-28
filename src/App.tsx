@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Signup from "./components/Signup/Signup";
+import { useSelector } from "react-redux";
+import { UserStore } from "./redux/store";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
+  const loggedIn = useSelector((state: UserStore) => state.loggedIn);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/home" />} />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute
+                children={<Home />}
+                value={"/signup"}
+                loggedIn={loggedIn}
+              />
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <PrivateRoute
+                children={<Signup />}
+                value={"/home"}
+                loggedIn={loggedIn}
+              />
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
