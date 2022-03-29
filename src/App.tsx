@@ -2,13 +2,9 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Signup from "./components/Signup/Signup";
-import { useSelector } from "react-redux";
-import { UserStore } from "./redux/store";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
-  const loggedIn = useSelector((state: UserStore) => state.loggedIn);
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -17,21 +13,17 @@ function App() {
           <Route
             path="/home"
             element={
-              <PrivateRoute
-                children={<Home />}
-                value={"/signup"}
-                loggedIn={loggedIn}
-              />
+              <PrivateRoute value={"/signup"}>
+                <Home />
+              </PrivateRoute>
             }
           />
           <Route
             path="/signup"
             element={
-              <PrivateRoute
-                children={<Signup />}
-                value={"/home"}
-                loggedIn={loggedIn}
-              />
+              <PrivateRoute value={"/home"}>
+                <Signup />
+              </PrivateRoute>
             }
           />
         </Routes>

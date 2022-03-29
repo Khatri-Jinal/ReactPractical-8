@@ -1,14 +1,15 @@
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router";
+import { UserStore } from "../../redux/store";
 
 function PrivateRoute({
   children,
   value,
-  loggedIn,
 }: {
   children: JSX.Element;
   value: string;
-  loggedIn: boolean;
 }) {
+  const loggedIn = useSelector((state: UserStore) => state.loggedIn);
   if (!loggedIn) {
     console.log(loggedIn);
     if (value === "/signup") {

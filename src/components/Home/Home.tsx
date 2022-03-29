@@ -10,8 +10,7 @@ function Home() {
   const name = user?.name;
   const email = user?.email;
   const phoneNo = user?.phone;
-  const ImageUrl = user?.photo ? user.photo : "";
-
+  const ImageUrl = user?.photo ?? "";
   const handleLogout = () => {
     localStorage.setItem("loggedIn", "false");
     localStorage.setItem("userName", "");
